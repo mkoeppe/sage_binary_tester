@@ -1,0 +1,50 @@
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+language: ruby
+
+env:
+  global:
+   - SAGE_SERVER=http://mirrors.xmission.com/sage/
+   - SAGE_VERSION=7.6
+
+matrix:
+  include:
+    ## Test on Ubuntu 12
+    - os: linux
+      env: SAGE_OS_DIR=linux/64bit SAGE_DISTRO_SUFFIX=Ubuntu_12.04 SAGE_ARCH=x86_64
+    ## Test on Ubuntu 14 (trusty)
+    - os: linux
+      dist: trusty
+      env: SAGE_OS_DIR=linux/64bit SAGE_DISTRO_SUFFIX=Ubuntu_14.04 SAGE_ARCH=x86_64
+    ## Test on Mac OS X 10.12
+    - os: osx
+      osx_image: xcode8.3
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
+    ## Test on Mac OS X 10.11
+    - os: osx
+      osx_image: xcode8
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
+    ## Test on Mac OS X 10.10
+    - os: osx
+      osx_image: xcode6.4
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
+install:
+- ./.travis-install.sh
+script:
+- ./.travis-test.sh
+
+addons:
+  apt:
+    packages:
+     # Fortran compiler needed, or optional package install might decide to build gcc.
+     - gfortran
+     # For torrent download (doesn't work)
+     #- aria2
+     # For polymake:
+     - libxml-libxslt-perl
+     - libxml-writer-perl
+     - libxml2-dev
+     - libperl-dev
+     - libncurses-dev
