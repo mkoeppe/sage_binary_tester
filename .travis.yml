@@ -7,13 +7,13 @@ language: ruby
 env:
   global:
    - SAGE_SERVER=http://mirrors.xmission.com/sage/
-   - SAGE_VERSION=7.6
+   - SAGE_VERSION=8.0
 
 matrix:
   include:
-    ## Test on Ubuntu 12
-    - os: linux
-      env: SAGE_OS_DIR=linux/64bit SAGE_DISTRO_SUFFIX=Ubuntu_12.04 SAGE_ARCH=x86_64
+    ## ## Test on Ubuntu 12
+    ## - os: linux
+    ##   env: SAGE_OS_DIR=linux/64bit SAGE_DISTRO_SUFFIX=Ubuntu_12.04 SAGE_ARCH=x86_64
     ## Test on Ubuntu 14 (trusty)
     - os: linux
       dist: trusty
@@ -21,15 +21,15 @@ matrix:
     ## Test on Mac OS X 10.12
     - os: osx
       osx_image: xcode8.3
-      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
-    ## Test on Mac OS X 10.11
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.6 SAGE_ARCH=x86_64
+    ## Test on Mac OS X 10.11 (will fail with this distro built on 10.12)
     - os: osx
       osx_image: xcode8
-      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
-    ## Test on Mac OS X 10.10
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.6 SAGE_ARCH=x86_64
+    ## Test on Mac OS X 10.10 (will fail with this distro built on 10.12)
     - os: osx
       osx_image: xcode6.4
-      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.3 SAGE_ARCH=x86_64
+      env: SAGE_OS_DIR=osx/intel SAGE_DISTRO_SUFFIX=OSX_10.12.6 SAGE_ARCH=x86_64
 install:
 - ./.travis-install.sh
 script:
